@@ -1,0 +1,415 @@
+/* Additional CSS for new sections */
+/* Reset and Base Styles */
+body, h1, h2, h3, p, a, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f8f8f8;
+    color: #333;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* Hero Section */
+.hero {
+    background-image: url('/static/images/'); /* Replace with your hero image path */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+}
+.hero-buttons {
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center the cards horizontally */
+    gap: 20px; /* Add space between the cards */
+    margin-top: 20px; /* Space between the cards and text above */
+}
+
+/* Card Styling */
+/* Card Styling */
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    flex: 1; /* Make cards flexible to fill space */
+    max-width: 300px; /* Limit the width of the cards */
+    text-align: center;
+    cursor: pointer; /* Show pointer on hover */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Add transition for hover effect */
+}
+
+.card:hover {
+    background-color: #84b0df; /* Change background color to blue on hover */
+    color: white; /* Change text color to white for better contrast */
+    transform: scale(1.05); /* Slightly enlarge the card on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Add a larger shadow */
+}
+
+/* Clickable Card Class */
+.clickable-card {
+    display: flex;
+    flex-direction: column; /* Stack title and description vertically */
+    align-items: center; /* Center align content */
+    justify-content: center; /* Center content vertically */
+    background-color: #84b0df;
+}
+.clickable-card {
+    background-color: #84b0df;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    flex: 1; /* Make cards flexible to fill space */
+    max-width: 300px; /* Limit the width of the cards */
+    text-align: center;
+    cursor: pointer; /* Show pointer on hover */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Add transition for hover effect */
+}
+.clickable-card:hover {
+    background-color: #f9f9f9; /* Change background color to blue on hover */
+    color: white; /* Change text color to white for better contrast */
+    transform: scale(1.05); /* Slightly enlarge the card on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Add a larger shadow */
+}
+
+.navbar {
+    position: fixed; /* Make the navbar fixed */
+    top: 0; /* Stick it to the top */
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 40px;
+    background: rgba(174, 231, 203, 0.8); /* Semi-transparent background */
+    color: black;
+    z-index: 1000; /* Ensure it stays on top of other elements */
+    backdrop-filter: blur(10px); /* Optional: Add blur effect for depth */
+}
+
+
+body {
+    padding-top: 80px; /* Adjust this value to match the navbar height to prevent content from hiding behind it */
+}
+
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links a {
+    margin: 0 10px;
+    color: black;
+}
+
+.hero-content h1 {
+    font-size: 50px;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.hero-content p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: black;
+}
+
+.hero-buttons button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.hero-buttons button:hover {
+    background-color: #3e8e41;
+}
+
+/* Features Section */
+.features {
+    padding: 60px 20px;
+    text-align: center;
+    
+    
+}
+.features {
+    background: rgba(10, 171, 180, 0.8); /* Semi-transparent background */
+    color: #020000; /* Keep the text color for contrast */
+    padding: 40px 20px; /* Add some padding to make the content look better */
+    border-radius: 10px; /* Optional: Add some rounded corners */
+    margin: 20px 0; /* Add vertical margin to separate from other sections */
+}
+
+
+.featurehead{
+    color: white;
+}
+.features h2 {
+    margin-bottom: 40px;
+}
+
+.feature-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    flex: 1;
+    max-width: 300px;
+    text-align: left;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* CTA Section */
+.cta-section {
+    background-color: #0aabb4;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.cta-card {
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.cta-card button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cta-card button:hover {
+    background-color: #3e8e41;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}
+
+/* Detailed Features Section */
+.detailed-features {
+    padding: 60px 20px;
+    background-color: #f2f2f2;
+    text-align: center;
+}
+
+.detailed-feature-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.detailed-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    flex: 1;
+    max-width: 300px;
+    text-align: left;
+}
+
+/* Testimonials Section */
+.testimonials {
+    padding: 60px 20px;
+    background-color: #0aabb4;
+    text-align: center;
+}
+
+.testimonial-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.testimonial-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    flex: 1;
+    max-width: 300px;
+}
+
+/* FAQ Section */
+.faq {
+    padding: 60px 20px;
+    background-color: #f8f8f8;
+    text-align: center;
+}
+
+.faq-item {
+    max-width: 600px;
+    margin: 10px auto;
+    text-align: left;
+}
+
+.faq-item h3 {
+    margin-bottom: 5px;
+}
+
+/* Contact Section */
+.contact {
+    padding: 60px 20px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+}
+
+.contact form {
+    max-width: 600px;
+    margin: auto;
+    background-color: #444;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.contact .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.contact label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.contact input,
+.contact textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #555;
+    background-color: #555;
+    color: white;
+}
+
+.contact button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact button:hover {
+    background-color: #3e8e41;
+}
+/* Container for split layout */
+.split-container {
+    display: flex;
+    height: 100vh; /* Full viewport height */
+}
+
+.left-half, .right-half {
+    width: 50%; /* Each takes half of the container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Left Half Styling */
+.left-half {
+    background-color: #f4f4f4; /* Light gray background color */
+    padding: 20px;
+    text-align: center;
+}
+
+.left-half .hero-content h1 {
+    font-size: 3rem;
+    color: #333; /* Darker color for text */
+}
+
+.left-half .hero-content p {
+    font-size: 1.2rem;
+    color: #666;
+    margin: 10px 0 20px 0;
+}
+
+.left-half .hero-buttons button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    background-color: #007bff; /* Blue color */
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.left-half .hero-buttons button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Right Half Styling */
+.right-half {
+    background-color: #e8f0fe; /* Adjust background color to complement the left half */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Prevent overflow if image is larger */
+}
+
+.right-half .background-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover; /* Ensures the image fits inside the container */
+    border-radius: 10px; /* Optional: Add rounded corners */
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+    .split-container {
+        flex-direction: column;
+    }
+
+    .left-half, .right-half {
+        width: 100%;
+        height: 50%; /* Adjust height for smaller screens */
+    }
+
+    .left-half .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .left-half .hero-content p {
+        font-size: 1rem;
+    }
+}

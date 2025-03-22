@@ -1,0 +1,79 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff; /* Change background to white */
+    background-image: url('/static/images/dashboard.jpeg'); /* Add your background image */
+    background-size: cover; /* Cover the entire page */
+    background-position: center; /* Center the background image */
+    color: #ffffff; /* Change text color to black for contrast */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative; /* Ensure positioning for the logout button */
+    overflow: hidden; /* Prevent scrolling if the image exceeds the viewport */
+}
+
+/* Container to hold the cards */
+.container {
+    display: flex;
+    gap: 20px;
+}
+
+/* Card Styles */
+.card {
+    border: 3.5px solid #00050c;
+    padding: 20px;
+    border-radius: 30px;
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Transition for background color */
+    text-decoration: none; /* Remove underline for links */
+    color: inherit; /* Inherit color from parent */
+}
+
+/* Hover effect for cards */
+.card:hover {
+    transform: translateY(-10px);
+    background-color: #52c8d8; /* Change background color to green on hover */
+}
+
+/* Button Styles (Remove since we are using links now) */
+.btn {
+    display: none; /* Hide button styles since we are using links */
+}
+
+/* Card Variants for different sections */
+.card.new-student {
+    border-color: #000000;
+}
+
+.card.attendance-report {
+    border-color: #000000;
+}
+
+.card.student-details {
+    border-color: #000000; /* Yellow border for student details */
+}
+
+/* Header styles */
+
+
+/* Logout button styles */
+.logout-btn {
+    color: white; /* Text color */
+    background-color: #d9534f; /* Logout button color */
+    padding: 10px 15px; /* Padding for the button */
+    text-decoration: none; /* Remove underline */
+    border-radius: 4px; /* Rounded corners */
+    position: fixed; /* Fixed positioning to keep it at the top right */
+    right: 20px; /* Distance from the right */
+    top: 20px; /* Distance from the top */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    z-index: 1000; /* Ensure it appears above other content */
+}
+
+.logout-btn:hover {
+    background-color: #c9302c; /* Darker red on hover */
+}

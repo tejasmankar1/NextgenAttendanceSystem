@@ -1,0 +1,113 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('/static/images/nwestdregister.jpeg'); /* Add your background image */
+    background-size: cover; /* Cover the entire viewport */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    color: #000; /* Black text for visibility */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Container Styling */
+.container {
+    background-color: rgba(242, 242, 242, 0.8); /* Light gray background for the container with transparency */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    width: 800px; /* Increased width to accommodate the captured photo */
+    text-align: center;
+}
+
+/* Form Styling */
+form {
+    margin-top: 20px;
+}
+
+.form-row {
+    display: flex; /* Use flexbox to arrange items side by side */
+    justify-content: space-between;
+    margin-bottom: 20px; /* Add spacing between rows */
+}
+
+.form-group {
+    flex: 1; /* Allow form groups to grow equally */
+    margin-right: 10px; /* Add space between form groups */
+}
+
+.form-group:last-child {
+    margin-right: 0; /* Remove margin from the last form group */
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+}
+
+input[type="text"], select {
+    width: 95%;
+    padding: 10px;
+    margin-top: 8px;
+    background-color: #e6e6e6; /* Light gray background for input fields */
+    color: #000; /* Black text for inputs */
+    border: none;
+    border-radius: 5px;
+}
+
+input[id="branch"], select {
+    width: 99%;
+    padding: 10px;
+    margin-top: 8px;
+    background-color: #e6e6e6; /* Light gray background for input fields */
+    color: #000; /* Black text for inputs */
+    border: none;
+    border-radius: 5px;
+}
+
+/* Button Styling */
+.btn {
+    background-color: #0066ff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0055cc;
+}
+
+.back-btn {
+    position: absolute; /* Position the back button at the top left */
+    top: 20px;
+    left: 20px;
+    background-color: #ff4444; /* Different color for the back button */
+}
+
+/* Capture Area Styling */
+.capture-area {
+    display: flex; /* Align video and captured image side by side */
+    justify-content: space-between;
+    margin-top: 10px; /* Add margin for spacing */
+}
+
+video {
+    border: 2px solid #000; /* Black border around the video */
+    border-radius: 10px;
+}
+
+#captured-image {
+    border: 2px solid #000; /* Border for the captured image */
+    border-radius: 10px;
+    width: 320px; /* Set width to match the webcam */
+    height: 240px; /* Set height to match the webcam */
+    margin-left: 10px; /* Space between video and captured image */
+    display: none; /* Initially hidden */
+}

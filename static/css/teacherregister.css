@@ -1,0 +1,127 @@
+/* Global Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+}
+
+/* Layout for two-column structure */
+.register-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2em;
+  background-color: #fff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Left column (form) */
+.form-container {
+  width: 50%;
+  padding: 2em;
+}
+
+.form-container h2 {
+  font-size: 2em;
+  color: #333;
+}
+
+.form-container p {
+  color: #777;
+  margin-bottom: 1em;
+}
+
+/* Input field container */
+label {
+  display: block;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 1.5em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+}
+
+/* Button styles */
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #6c63ff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+button[type="submit"]:hover {
+  background-color: #5a54d4;
+}
+
+/* Back to Login button */
+.back-btn-container {
+  margin-top: 2em;
+  text-align: center;
+}
+
+.back-btn {
+  color: #6c63ff;
+  text-decoration: none;
+  font-weight: bold;
+  background-color: #fff;
+  padding: 10px 15px;
+  border: 1px solid #6c63ff;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+.back-btn:hover {
+  background-color: #6c63ff;
+  color: #fff;
+}
+
+/* Right column (message) */
+.message-container {
+  width: 50%;
+  text-align: center;
+  position: relative; /* Position relative to allow absolute positioning of the image */
+}
+
+.message-container img {
+  width: 100%; /* Make the image take the full width of the container */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+  .register-container {
+    flex-direction: column;
+    padding: 1em;
+  }
+
+  .form-container, .message-container {
+    width: 100%;
+    padding: 1em;
+  }
+
+  .back-btn-container {
+    margin-top: 1em;
+  }
+}

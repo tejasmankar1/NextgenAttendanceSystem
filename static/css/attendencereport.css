@@ -1,0 +1,167 @@
+/* General styles for the body and container */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2em;
+    text-align: center;
+}
+
+.back-btn {
+    color: white;
+    background-color: #333;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9em;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    transition: background-color 0.3s;
+}
+
+.back-btn:hover {
+    background-color: #555;
+}
+
+/* Filter button styling */
+.filter-btn-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#toggle-filter-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#toggle-filter-btn:hover {
+    background-color: #45a049;
+}
+
+/* Filter form styling */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.filter-container label,
+.filter-container input,
+.filter-container button {
+    margin: 0 10px;
+    font-size: 1em;
+}
+
+.filter-container button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filter-container button:hover {
+    background-color: #45a049;
+}
+
+/* Container styling */
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+thead {
+    background-color: #4CAF50;
+    color: white;
+}
+
+thead th {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #e8f5e9;
+}
+
+tbody td {
+    padding: 10px;
+    text-align: center;
+    font-size: 0.9em;
+    border: 1px solid #ddd;
+}
+
+tbody tr:hover {
+    background-color: #d1ffd1;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    table {
+        font-size: 0.9em;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .back-btn {
+        padding: 8px 12px;
+        font-size: 0.8em;
+    }
+
+    #toggle-filter-btn {
+        font-size: 0.9em;
+    }
+
+    .filter-container {
+        flex-direction: column;
+    }
+
+    .filter-container label,
+    .filter-container input,
+    .filter-container button {
+        margin: 10px 0;
+    }
+}
