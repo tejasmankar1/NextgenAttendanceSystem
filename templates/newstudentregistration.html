@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/newstudentregistration.css') }}">
+</head>
+<body>
+    <main>
+        <div class="container">
+            <button onclick="window.location.href='{{ url_for('admin') }}'" class="btn back-btn">Back to Admin</button>
+            <h1>New Student Registration</h1>
+            <form id="registration-form" method="post">
+                <!-- Face Capture Section -->
+                <div class="form-group">
+                    <label for="face-capture">Capture Face:</label>
+                    <div class="capture-area">
+                        <video id="video" width="320" height="240" autoplay></video>
+                        <img id="captured-image" src="" alt="Captured Photo" style="display:none;" />
+                    </div>
+                    <button type="button" id="capture-btn">Capture</button>
+                    <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+                </div>
+
+                <!-- Information Section -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Full Name:</label>
+                        <input type="text" id="name" name="name" placeholder="Enter full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="usn">USN:</label>
+                        <input type="text" id="usn" name="usn" placeholder="Enter USN" required>
+                    </div>
+                </div>
+                
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="year">Year:</label>
+                        <select id="year" name="year" required>
+                            <option value="">Select Year</option>
+                            <option value="First">First</option>
+                            <option value="Second">Second</option>
+                            <option value="Third">Third</option>
+                            <option value="Final">Final</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="branch">Branch:</label>
+                        <select id="branch" name="branch" required>
+                            <option value="">Select Branch</option>
+                            <option value="FY">FY</option>
+                            <option value="CSE">CSE</option>
+                            <option value="AIDS">AIDS</option>
+                            <option value="AIML">AIML</option>
+                            <option value="ETC">ETC</option>
+                            <option value="EE">EE</option>
+                            <option value="ME">ME</option>
+                        </select>
+                    </div>
+                </div>
+
+                <input type="hidden" name="photo" id="photo" />
+
+                <button type="submit" class="btn">Register Student</button>
+            </form>
+        </div>
+
+        <script>
+            // Access the webcam and capture photo
+            const video = document.getElementById('video');
+            const canvas = document.getElementById('canvas');
+            const context = canvas.getContext('2d');
+            const captureBtn = document.getElementById('capture-btn');
+            const photoInput = document.getElementById('photo');
+            const capturedImage = document.getElementById('captured-image');
+
+            // Access the webcam
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    video.srcObject = stream;
+                })
+                .catch(error => {
+                    console.error("Error accessing webcam: ", error);
+                });
+
+            // Capture the photo
+            captureBtn.addEventListener('click', () => {
+                context.drawImage(video, 0, 0, 320, 240);
+                captureBtn.textContent = 'Photo Captured';
+                const dataURL = canvas.toDataURL('image/png');
+                photoInput.value = dataURL; // Store the photo data in the hidden input
+
+                // Show captured photo
+                capturedImage.src = dataURL;
+                capturedImage.style.display = 'block'; // Display the captured image
+            });
+
+            // Handle form submission
+            document.getElementById('registration-form').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Prepare data for submission
+                const usn = document.getElementById('usn').value;
+                const name = document.getElementById('name').value;
+                const year = document.getElementById('year').value;
+                const branch = document.getElementById('branch').value;
+
+                // Send the photo and other data to the server
+                fetch('/upload_photo', {
+                    method: 'POST',
+                    body: JSON.stringify({ 
+                        photo: photoInput.value,
+                        usn: usn,
+                        name: name,
+                        year: year,
+                        branch: branch
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Registration successful!'); // Show success pop-up
+                        this.reset(); // Reset the form after successful registration
+                        capturedImage.style.display = 'none'; // Hide the captured image
+                    } else {
+                        alert('Photo upload failed. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error uploading photo:', error);
+                    alert('An error occurred while uploading the photo. Please try again.');
+                });
+            });
+        </script>
+    </main>
+</body>
+</html>

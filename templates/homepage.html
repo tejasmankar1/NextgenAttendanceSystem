@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Next Generation Attendance System - Efficient, Accurate, and Secure Attendance Management for Schools and Institutions.">
+    <meta name="keywords" content="Attendance System, School Attendance, Teacher Login, Efficient Attendance, Real-time Reporting">
+    <title>Next Generation Attendance System</title>
+    <link rel="stylesheet" href="/static/css/homepage.css">
+</head>
+<body>
+    <!-- Split Hero Section -->
+    <header class="hero">
+        <nav class="navbar">
+            <div class="logo">  AttendancePro</div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#features">Features</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+        <div class="split-container">
+            <!-- Left Half - Project Name and Description -->
+          <!-- Left Half - Project Name and Description -->
+            <!-- Left Half - Project Name and Description -->
+            <div class="left-half">
+                <div class="hero-content">
+                    <h1>AttendancePro</h1>
+                    <p>Taking attendance to the next level. Record attendance quickly and efficiently with our advanced system.</p>
+                    <div class="hero-buttons">
+                        <div class="card clickable-card" onclick="location.href='{{ url_for('attendance') }}'">
+                            <h3>Take Attendance</h3>
+                            <p>Quickly record attendance for your classes.</p>
+                        </div>
+                        <div class="card clickable-card" onclick="location.href='{{ url_for('teacher_login') }}'">
+                            <h3>Teacher Login</h3>
+                            <p>Access your account and manage attendance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Right Half - Background Image -->
+            <div class="right-half">
+                <img src="/static/images/backhome1.jpeg" alt="Background Image" class="background-image">
+            </div>
+        </div>
+    </header>
+  
+
+    <!-- Features Section -->
+    <main>
+        <section class="features" id="features">
+            <div class="featurehead"><h2>Why Choose Our System?</h2></div>
+            <div class="feature-cards">
+                <div class="card">
+                    <h3>Fast & Efficient</h3>
+                    <p>Record attendance for multiple students in seconds, saving time and effort.</p>
+                </div>
+                <div class="card">
+                    <h3>Accurate Reporting</h3>
+                    <p>Generate detailed reports with real-time data to monitor attendance effectively.</p>
+                </div>
+                <div class="card">
+                    <h3>Secure & Reliable</h3>
+                    <p>Your data is secure with us, ensuring privacy and protection at all times.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Features Section -->
+        <section class="detailed-features">
+            <h2>Explore More Features</h2>
+            <div class="detailed-feature-cards">
+                <div class="card">
+                    <h3>Automated Reports</h3>
+                    <p>Receive automated daily, weekly, and monthly attendance reports directly in your email.</p>
+                </div>
+                <div class="card">
+                    <h3>Customizable Attendance Rules</h3>
+                    <p>Set your own attendance rules, including late penalties, half-days, and more.</p>
+                </div>
+                <div class="card">
+                    <h3>Cloud Storage</h3>
+                    <p>All data is stored securely in the cloud, accessible from anywhere and on any device.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials" id="testimonials">
+            <div class="featurehead"><h2>What Our Users Say</h2></div>
+            <div class="testimonial-cards">
+                <div class="card">
+                    <p>"This system has revolutionized how we take attendance. It's so easy to use!"</p>
+                    <span>- Mr. Smith, High School Teacher</span>
+                </div>
+                <div class="card">
+                    <p>"I love how efficient the system is. It saves me so much time every day."</p>
+                    <span>- Ms. Johnson, University Lecturer</span>
+                </div>
+                <div class="card">
+                    <p>"Accurate and reliable. I never have to worry about missing any data."</p>
+                    <span>- Mr. Lee, College Administrator</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq" id="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>How secure is the data?</h3>
+                <p>Our system uses advanced encryption and security protocols to ensure that your data is safe and protected.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I access the system on my phone?</h3>
+                <p>Yes, our system is fully responsive and works on all devices, including phones and tablets.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Is there a free trial available?</h3>
+                <p>Yes, we offer a 30-day free trial for all new users. No credit card required!</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <h2>Contact Us</h2>
+            <form action="/send-message" method="post">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <div class="cta-card">
+                <h2>Ready to Get Started?</h2>
+                <button onclick="location.href='{{ url_for('attendance') }}'">Take Attendance</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 AttendancePro. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <header>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </header>
+    <main>
+        <div class="container">
+         <a href="{{ url_for('new_student_registration') }}" class="card new-student">
+                <h2>New Student Registration</h2>
+                <p>Register new students for the attendance system.</p>
+            </a>
+            <a href="{{ url_for('attendance_report') }}" class="card attendance-report">
+                <h2>Attendance Report</h2>
+                <p>View and download attendance reports for students.</p>
+            </a>
+            <a href="{{ url_for('student_details') }}" class="card student-details">
+                <h2>Student Details</h2>
+                <p>View all registered students' details.</p>
+            </a>
+        </div>
+    </main>
+</body>
+</html>

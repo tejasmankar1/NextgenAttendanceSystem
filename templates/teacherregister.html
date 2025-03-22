@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/teacherregister.css') }}">
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAuf3_88nlZMLiBAyQhn7bd4nvI58z9soc",
+            authDomain: "attendancesystem-b5af6.firebaseapp.com",
+            databaseURL: "https://attendancesystem-b5af6-default-rtdb.firebaseio.com",
+            projectId: "attendancesystem-b5af6",
+            storageBucket: "attendancesystem-b5af6.appspot.com",
+            messagingSenderId: "46577082396",
+            appId: "1:46577082396:web:ccab373ff59de498943fd9"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const database = getDatabase(app);
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const registerForm = document.getElementById("register-form");
+
+            registerForm.addEventListener("submit", function(event) {
+                event.preventDefault();
+
+                const name = document.getElementById('teacher-name').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const designation = document.getElementById('designation').value;
+                const department = document.getElementById('department').value;
+
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        const user = userCredential.user;
+                        const userId = user.uid;
+
+                        // Send email verification
+                        sendEmailVerification(user).then(() => {
+                            // Store teacher info in Firebase Realtime Database
+                            return set(ref(database, 'teachers/' + userId), {
+                                name: name,
+                                email: email,
+                                designation: designation,
+                                department: department
+                            });
+                        })
+                        .then(() => {
+                            alert("Registration Successful! Please verify your email.");
+                            window.location.href = "{{ url_for('teacher_login') }}"; 
+                        })
+                        .catch((error) => {
+                            alert("Error: " + error.message);
+                        });
+                    })
+                    .catch((error) => {
+                        alert("Error: " + error.message);
+                    });
+            });
+        });
+    </script>
+</head>
+<body>
+    <main>
+        <div class="register-container">
+            <!-- Left Column: Register Form -->
+            <div class="form-container">
+                <center><h2>Teacher Register</h2></center>
+                <form id="register-form">
+                    <label for="teacher-name">Teacher Name:</label>
+                    <input type="text" id="teacher-name" name="teacher-name" required>
+                    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label for="designation">Designation:</label>
+                    <input type="text" id="designation" name="designation" required>
+                    
+                    <label for="department">Department:</label>
+                    <select id="department" name="department" required>
+                        <option value="">Select Department</option>
+                        <option value="CSE">CSE</option>
+                        <option value="AIML">AIML</option>
+                        <option value="AIDS">AIDS</option>
+                        <option value="EE">EE</option>
+                        <option value="ME">ME</option>
+                        <option value="FY">FY</option>
+                    </select>
+                    
+                    <label for="password">Set Password:</label>
+                    <input type="password" id="password" name="password" required>
+                    
+                    <button type="submit" class="btn">Register</button>
+                </form>
+                
+                <div class="back-btn-container">
+                    <a href="{{ url_for('teacher_login') }}" class="back-btn">Back to Login</a>
+                </div>
+            </div>
+
+            <!-- Right Column: Image or Message -->
+            <div class="message-container">
+                <img src="{{ url_for('static', filename='images/register.png') }}" alt="Motivational Message">
+            </div>
+        </div>
+    </main>
+</body>
+</html>

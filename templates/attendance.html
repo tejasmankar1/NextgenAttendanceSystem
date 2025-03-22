@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/attendence.css') }}">
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .back-btn {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #0056b3;
+            border-radius: 5px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .back-btn:hover {
+            background-color: #004494;
+        }
+
+        /* Main Container Styling */
+        .container {
+            display: flex; /* Flexbox layout for webcam and attendance table */
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            position: relative;
+        }
+
+        /* Webcam Container */
+        .webcam-container {
+            width: 60%; /* Webcam takes up 60% of the width */
+            padding-right: 20px;
+            text-align: center; /* Center the card below the webcam */
+        }
+
+        video {
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Centered Card Below Webcam */
+        .attendance-status {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .card {
+            display: inline-block; /* Center the card horizontally */
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
+
+        /* Green background when attendance is marked */
+        .card.success {
+            background-color: #4CAF50; /* Green background for success */
+            color: white;
+        }
+
+        /* Attendance Table */
+        .attendance-table-container {
+            width: 40%; /* Attendance table takes up 40% of the width */
+        }
+
+        .attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        .attendance-table th, .attendance-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .attendance-table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .attendance-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .webcam-container, .attendance-table-container {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>AttendancePro</h1>
+        <a href="{{ url_for('homepage') }}" class="back-btn">Back to Homepage</a>
+    </header>
+    <main>
+        <section class="container">
+            <div class="webcam-container">
+                <h2>Face Recognition</h2>
+                <p class="info-text">Position your face in front of the camera.</p>
+                <video id="video" width="640" height="480" autoplay></video>
+                <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+                <p class="loading-text" id="loading-text">Loading webcam...</p>
+
+                <!-- Centered Card Below Webcam -->
+                <div class="attendance-status">
+                    <div class="card" id="attendance-card">
+                        <div class="attendance-mark">
+                            <p id="attendance-message">Waiting for face detection...</p>
+                        </div>
+                        <div class="student-info">
+                            <p><strong>Name:</strong> <span id="student-name">Not detected</span></p>
+                            <p><strong>USN:</strong> <span id="student-usn">---</span></p>
+                            <p><strong>Year:</strong> <span id="student-year">---</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="attendance-table-container">
+                <h2>Attendance List</h2>
+                <table class="attendance-table" id="attendance-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>USN</th>
+                            <th>Year</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendance-list">
+                        <!-- Dynamic attendance rows will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    
+    <script src="https://docs.opencv.org/3.4.1/opencv.js"></script>
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        const loadingText = document.getElementById('loading-text');
+        const attendanceMessage = document.getElementById('attendance-message');
+        const attendanceList = document.getElementById('attendance-list');
+        const attendanceCard = document.getElementById('attendance-card');
+
+        const markedUSNs = new Set(); // Track marked USNs
+
+        // Access the webcam
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+                loadingText.style.display = 'none';
+                detectFaces();
+            })
+            .catch(err => {
+                console.error("Error accessing webcam: ", err);
+                loadingText.innerText = 'Unable to access webcam';
+            });
+
+        function detectFaces() {
+            setInterval(() => {
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                const imageData = canvas.toDataURL('image/png');
+                recognizeFace(imageData);
+            }, 1000); // Check every second
+        }
+
+        function recognizeFace(imageData) {
+            fetch('/attendance', {
+                method: 'POST',
+                body: JSON.stringify({ photo: imageData }),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                handleRecognitionResponse(data);
+            })
+            .catch(err => {
+                console.error("Error recognizing face: ", err);
+                attendanceMessage.innerText = 'Error recognizing face. Please try again.';
+            });
+        }
+
+        function handleRecognitionResponse(data) {
+            const currentRecognizedUSNs = new Set(); // Track recognized USNs in this frame
+
+            if (Array.isArray(data) && data.length > 0) { // Validate data format
+                data.forEach(student => {
+                    if (student.usn && !markedUSNs.has(student.usn)) {
+                        markedUSNs.add(student.usn); // Mark attendance only if not already marked
+                        currentRecognizedUSNs.add(student.usn); // Add to currently recognized set
+                        markAttendance(student); // Mark attendance
+                    }
+                });
+
+                // Update attendance message based on recognized students
+                if (currentRecognizedUSNs.size > 0) {
+                    attendanceMessage.innerText = "Attendance marked successfully for detected students.";
+                }
+            } else {
+                attendanceMessage.innerText = "No match found.";
+            }
+        }
+
+        function markAttendance(student) {
+            if (student.name && student.usn && student.year) {
+                // Update student information on the card
+                document.getElementById('student-name').innerText = student.name;
+                document.getElementById('student-usn').innerText = student.usn;
+                document.getElementById('student-year').innerText = student.year;
+                
+                // Add success class to card
+                attendanceCard.classList.add('success');
+
+                // Add to attendance list
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${student.name}</td>
+                    <td>${student.usn}</td>
+                    <td>${student.year}</td>
+                    <td>Present</td>
+                `;
+                attendanceList.appendChild(row);
+
+                attendanceMessage.innerText = `Attendance marked for ${student.name}.`;
+            } else {
+                console.error("Student data is incomplete:", student);
+                attendanceMessage.innerText = 'Invalid student data. Attendance not marked.';
+            }
+        }
+    </script>
+    
+</body>
+</html>
